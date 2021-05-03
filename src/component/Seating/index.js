@@ -1,11 +1,15 @@
-import { useCreateReservation } from "../../queries/index";
+import { useCreateReservation, createReservation } from '../../queries';
+import { useQuery, useMutation, queryCache } from 'react-query'
+
 function Seating(){
-    // onsubmit set body 
-    // set body to null on success
-    const state = {
-            performanceId: 1,
+
+    const mutation= useCreateReservation()
+
+
+    const reservationRequest = {
+            performanceId: 2,
             customer: {
-              id: 1
+              id: 2
             },
             seatRequests: [
               {
@@ -17,9 +21,16 @@ function Seating(){
             ]
     }
 
+
+
     const onSubmit = () => {
-        
+        mutation.mutate(reservationRequest);
     }
+
+    console.log('isSuccess: ',mutation.isSuccess)
+    console.log('isLoading: ',mutation.isLoading)
+    console.log('isError: ',mutation.isError)
+    console.log(' ');
 
     return (
         <div>

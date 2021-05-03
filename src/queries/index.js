@@ -48,7 +48,7 @@ const getPerformances = async () => {
 
 const getSeats = async (id) => {
     try {
-        const response = await fetch(`http://ec2-54-159-33-6.compute-1.amazonaws.com:5005/ticket-guru/api/performances/${id}/availability`)
+        const response = await fetch(`http://ec2-54-159-33-6.compute-1.amazonaws.com:5005/ticket-guru/api/performances/${id}/availability`);
         if (!response.ok || response.status !== 200) throw new Error('Having trouble retrieving data, please try again later');
         return await response.json();
     } catch(err){
@@ -56,14 +56,19 @@ const getSeats = async (id) => {
     }
 }
 const createReservation = async (body) => {
+    console.log('body: ',body);
     try {
-        const response = await fetch(`http://ec2-54-159-33-6.compute-1.amazonaws.com:5005/ticket-guru/api/reservations`,
+        const response = await fetch('http://ec2-54-159-33-6.compute-1.amazonaws.com:5005/ticket-guru/api/reservations',
         {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body)
         })
-        if (!response.ok || response.status !== 200) throw new Error('Having trouble retrieving data, please try again later');
+        console.log('response: ',response);
+        if (!response.ok || response.status !== 201) throw new Error('Having trouble retrieving data, please try again later');
         return await response.json();
     } catch(err){
+        console.log('err: ',err);
         throw new Error('Having trouble retrieving data, please try again later');
     }  
 }
@@ -99,11 +104,13 @@ export function useSeats(dataPerformances) {
       });
 }
 
-export function useCreateReservation(body) {
-    return useMutation(['create-reservation', body], 
-        () => createReservation(body),
-        { enabled: !!body},
-        {
-            onSuccess: () => queryCache.refetchQueries('reservations'),
-        });
-  }
+export function useCreateReservation() {
+    return useMutation(body => createReservation(body))    
+}
+
+//   return useMutation(['create-reservation', body], 
+//   () => createReservation(body),
+//   { enabled: !!body},
+//   {
+//       onSuccess: () => queryCache.refetchQueries('reservations'),
+//   });
