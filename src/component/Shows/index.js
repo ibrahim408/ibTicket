@@ -1,11 +1,24 @@
-function Shows({fetching,status,shows,error,setShowingID}){
+import './Shows.css'
+
+function Shows({fetching,status,shows,error,setShowing}){
 
     if (fetching) return (<div>Loading...</div>)
-    // console.log('shows: ',shows);
 
+    const renderShow = (show,index) => {
+        return (
+            <li key={index.toString()}  onClick = {() => setShowing({id: show.id, name: show.name})}>
+                <h3>{show.name}</h3>
+            </li>
+        )
+    }
+    
     return (
-        <div>
-            Shows....
+        <div className="shows-container">
+        <ul>
+            {shows.map((show,index) => {
+                    return renderShow(show,index)
+            })}
+        </ul>
         </div>
     )
 

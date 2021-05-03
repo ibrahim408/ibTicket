@@ -1,4 +1,4 @@
-import { useQuery, useMutation, queryCache } from 'react-query'
+import { useQuery, useMutation} from 'react-query'
 
 const getUser = async () => {
     try {
@@ -56,7 +56,6 @@ const getSeats = async (id) => {
     }
 }
 const createReservation = async (body) => {
-    console.log('body: ',body);
     try {
         const response = await fetch('http://ec2-54-159-33-6.compute-1.amazonaws.com:5005/ticket-guru/api/reservations',
         {
@@ -64,11 +63,9 @@ const createReservation = async (body) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(body)
         })
-        console.log('response: ',response);
         if (!response.ok || response.status !== 201) throw new Error('Having trouble retrieving data, please try again later');
         return await response.json();
     } catch(err){
-        console.log('err: ',err);
         throw new Error('Having trouble retrieving data, please try again later');
     }  
 }
@@ -97,10 +94,10 @@ export function useReservations(dataCustomer) {
       });
 }
 
-export function useSeats(dataPerformances) {
-    return useQuery(['seats', dataPerformances[0]?.id], 
-        () => getSeats(dataPerformances[0]?.id),
-        { enabled: !!dataPerformances[0]?.id,
+export function useSeats(selectedPerformance = {}) {
+    return useQuery(['seats', selectedPerformance.id], 
+        () => getSeats(selectedPerformance.id),
+        { enabled: !!selectedPerformance.id,
       });
 }
 
@@ -108,9 +105,6 @@ export function useCreateReservation() {
     return useMutation(body => createReservation(body))    
 }
 
-//   return useMutation(['create-reservation', body], 
-//   () => createReservation(body),
-//   { enabled: !!body},
-//   {
-//       onSuccess: () => queryCache.refetchQueries('reservations'),
-//   });
+{
+    // onSuccess: () => queryClient.invalidateQueries('reservations')
+}

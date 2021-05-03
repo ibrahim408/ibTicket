@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 function useTabs() {
-    const [tab,setTab] = useState('reservation');
+    const [tab,setTab] = useState('reservations');
     
     const onClickTab = (tb) => {
         setTab(tb);

@@ -1,13 +1,15 @@
-.reservation-container {
+.shows-container {
     flex: 1;
     display: flex;
     overflow: scroll;
 }
-.reservation-container  ul {
+.shows-container ul {
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.reservation-container  li {
+.shows-container ul li {
     height: 0px;
     min-width: 250px;
     box-sizing: border-box;
@@ -21,6 +23,7 @@
     border-radius: 10px;
 }
 
-.reservation-container  ul li h3 {
+.shows-container ul li h3 {
     color: #ffffff;
 }
+

@@ -1,0 +1,96 @@
+.seating-container{
+    flex: 1;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.seating-container h1 {
+    text-align: center;
+    box-sizing: border-box;
+    max-width: 250px;
+    padding: 10px;
+    background-color: #1B2438;;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.seating-container ul{
+    list-style: none;
+    width: 200px;
+    background-color: #1B2438;
+    padding: 0;
+    margin: 0;
+}
+
+.seating-container ul li{
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 0 5px 25px rgba(0,0,0,.2);
+}
+
+.seating-container ul li:hover{
+    transform: scale(1.1);
+    box-shadow: 0 5px 25px rgba(0,0,0,.2);
+}
+
+.number-of-seats-container {
+    background-color: red;
+    display: inline-block;
+}
+
+.select-seats-container{
+    width: 300px;
+    height: 75;
+    border: 2px solid #1B2438;
+    display: flex;
+    border-radius: 10px;
+}
+
+
+
+.display-seat-count{
+    flex: 3;
+    border-right: 2px solid #1B2438;;
+}
+
+.display-seat-count p{
+    text-align: center;
+}
+
+.update-seat-count{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.plus-button{
+    flex: 1;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+.minus-button{
+    flex: 1;
+    border-top: 2px solid black;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.register-button{
+    margin-top: 50px;
+    display: block;
+    background-color: red;
+    box-sizing: border-box;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 20px;
+}
+
+.register-button h2 {
+    color: #ffffff
+}

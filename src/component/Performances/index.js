@@ -1,18 +1,28 @@
-
-function Performance({fetching,status,performances,error,showingID}){
-    // please select a showing...
-
-    console.log('performances: ',performances);
-    console.log('showingID: ',showingID);
-    
-    const filteredPerformances = performances.filter(performance => performance.showId === 1);
+import './Performances.css';
+import { getHour } from '../../helper/utility';
+function Performance({fetching,status,performances,error,selectedShowing,setPerformance}){
+    const filteredPerformances = performances.filter(performance => selectedShowing && performance.showId === selectedShowing.id);
 
     if (fetching) return (<div>Loading...</div>)
-    console.log('performances: ',filteredPerformances);
+    if (!selectedShowing) return  (<div><h1>Please select a Showing</h1></div>)
 
+
+    const renderPerformance = (performance,index) => {
+        const startingTime = getHour(performance.showTime);
+        return (
+            <li key={index.toString()}  onClick = {() => setPerformance({id: performance.id, startingTime: startingTime})}>
+                <h3>{startingTime}</h3>
+            </li>
+        )
+    }
+    
     return (
-        <div>
-            Performance....
+        <div className="performance-container">
+            <ul>
+                {filteredPerformances.map((performance,index) => {
+                        return renderPerformance(performance,index)
+                })}
+            </ul>
         </div>
     )
 

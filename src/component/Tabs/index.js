@@ -20,7 +20,7 @@ function Tabs({tab, setTab, onClickTab}){
     
     return (
         <div className="tabs-container">
-            {renderTab('reservation','Reservation')}
+            {renderTab('reservations','Reservation')}
             {renderTab('shows','Shows')}
             {renderTab('performances','Performances')}
             {renderTab('booking','Booking')}
